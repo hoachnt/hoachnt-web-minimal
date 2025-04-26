@@ -11,9 +11,9 @@ const inter = Inter({
 
 // Define metadata for the application
 export const metadata = {
-	title: "Nguyen Tien Hoach - Software Developer",
+	title: "Nguyen Tien Hoach - Fullstack Developer",
 	description:
-		"Software engineer specializing in developing scalable web applications and system architectures.",
+		"Fullstack engineer specializing in developing scalable web applications and system architectures.",
 };
 
 // Define props type for the RootLayout component
