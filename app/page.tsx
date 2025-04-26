@@ -20,6 +20,26 @@ export default function Home() {
 		"about",
 	]);
 	const navRef = useRef<HTMLDivElement | null>(null);
+	const [projectCount, setProjectCount] = useState<number | null>(null);
+
+	const fetchProjectCount = async () => {
+		try {
+			const response = await fetch(
+				"https://api.github.com/users/hoachnt/repos"
+			);
+			if (!response.ok) {
+				throw new Error("Failed to fetch GitHub repositories");
+			}
+			const repos = await response.json();
+			setProjectCount(repos.length);
+		} catch (error) {
+			console.error("Error fetching project count:", error);
+		}
+	};
+
+	useEffect(() => {
+		fetchProjectCount();
+	}, []);
 
 	useEffect(() => {
 		const updateTime = () => {
@@ -274,7 +294,9 @@ export default function Home() {
 								transition={{ delay: 0.2, duration: 0.5 }}
 							>
 								<p className="text-lg sm:text-xl font-medium">
-									19
+									{projectCount !== null
+										? projectCount
+										: "Loading..."}
 								</p>
 								<p className="text-xs text-[#666666] dark:text-[#999999]">
 									Projects
