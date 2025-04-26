@@ -19,7 +19,7 @@ export function ThemeToggle(): JSX.Element {
 				className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#e5e5e1] dark:bg-[#222222] flex items-center justify-center"
 				aria-hidden="true"
 			>
-				<div className="w-3 h-3 sm:w-4 sm:h-4 bg-[#111111] dark:bg-[#f5f5f1] rounded-sm"></div>
+				<div className="w-3 h-3 sm:w-4 sm:h-4 bg-[#111111] dark:bg-[#f5f5f1] rounded-xs"></div>
 			</div>
 		);
 	}
@@ -31,14 +31,14 @@ export function ThemeToggle(): JSX.Element {
 	return (
 		<motion.button
 			onClick={handleThemeToggle}
-			className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#e5e5e1] dark:bg-[#222222] flex items-center justify-center transition-colors"
+			className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#e5e5e1] dark:bg-[#222222] flex items-center justify-center transition-colors cursor-pointer"
 			aria-label="Toggle theme"
 			whileHover={{ scale: 1.1 }}
 			whileTap={{ scale: 0.9 }}
 			transition={{ type: "spring", stiffness: 400, damping: 17 }}
 		>
 			<motion.div
-				className="w-3 h-3 sm:w-4 sm:h-4 bg-[#111111] dark:bg-[#f5f5f1] rounded-sm"
+				className="w-3 h-3 sm:w-4 sm:h-4 bg-[#111111] dark:bg-[#f5f5f1] rounded-xs"
 				animate={{ rotate: theme === "dark" ? 180 : 0 }}
 				transition={{ duration: 0.5 }}
 			/>

@@ -374,7 +374,7 @@ export default function Home() {
 						whileHover={{ rotate: 180 }}
 						transition={{ duration: 0.8 }}
 					>
-						<div className="w-4 h-4 sm:w-5 sm:h-5 bg-[#f5f5f1] dark:bg-[#111111] rounded-sm"></div>
+						<div className="w-4 h-4 sm:w-5 sm:h-5 bg-[#f5f5f1] dark:bg-[#111111] rounded-xs"></div>
 					</motion.div>
 					<div className="text-center text-xs sm:text-sm text-[#666666] dark:text-[#999999]">
 						<p>© {new Date().getFullYear()} • Hoachnt</p>
