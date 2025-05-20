@@ -1,5 +1,4 @@
-// hooks/useProjectCount.ts
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ProjectCountState {
     count: number | null;
@@ -7,26 +6,30 @@ interface ProjectCountState {
     error: string | null;
 }
 
-export function useProjectCount(username: string): ProjectCountState {
+export function useProjectCount(): ProjectCountState {
     const [state, setState] = useState<ProjectCountState>({ count: null, loading: true, error: null });
 
     useEffect(() => {
         const fetchCount = async () => {
             try {
-                const response = await fetch(`https://api.github.com/users/${username}/repos`);
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch GitHub repositories: ${response.statusText}`);
+                const res = await fetch('/api/github/project-count');
+                if (!res.ok) {
+                    throw new Error(`Failed to fetch: ${res.statusText}`);
                 }
-                const repos = await response.json();
-                setState({ count: repos.length, loading: false, error: null });
+                const data = await res.json();
+                setState({ count: data.count, loading: false, error: null });
             } catch (error) {
-                console.error("Error fetching project count:", error);
-                setState({ count: null, loading: false, error: error instanceof Error ? error.message : String(error) });
+                console.error("Error fetching GitHub project count:", error);
+                setState({
+                    count: null,
+                    loading: false,
+                    error: error instanceof Error ? error.message : String(error),
+                });
             }
         };
 
         fetchCount();
-    }, [username]); // Зависимость от username
+    }, []);
 
     return state;
 }
