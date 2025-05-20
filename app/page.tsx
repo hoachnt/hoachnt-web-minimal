@@ -54,7 +54,7 @@ export default function Home() {
 		count: projectCount,
 		loading: projectsLoading,
 		error: projectsError,
-	} = useProjectCount("hoachnt");
+	} = useProjectCount();
 	const visibleSections = useScrollSpy(sections); // Отслеживаем видимость секций
 
 	// Функция для плавного скролла (можно было бы вставить в useScrollSpy, но здесь она управляется страницей)
