@@ -24,13 +24,13 @@ const skillCategoriesData: SkillCategory[] = [
 	},
 	{
 		title: "Backend",
-		skills: ["Golang", "PostgreSQL"],
+		skills: ["Golang", "PostgreSQL", "Redis", "GCS", "Caddy"],
 	},
 	{
 		title: "DevOps",
 		skills: ["Docker", "Kubernetes"],
 	},
-	{ title: "Systems", skills: ["Linux", "NixOS"] },
+	{ title: "Systems", skills: ["Linux", "NixOS", "Ubuntu", "Fedora"] },
 ];
 
 const aboutData = {
