@@ -55,34 +55,10 @@ export default function Home() {
 		loading: projectsLoading,
 		error: projectsError,
 	} = useProjectCount();
-	const visibleSections = useScrollSpy(sections); // Отслеживаем видимость секций
-
-	// Функция для плавного скролла (можно было бы вставить в useScrollSpy, но здесь она управляется страницей)
-	const scrollToSection = (sectionId: SectionId) => {
-		const section = document.getElementById(sectionId);
-		if (section) {
-			window.scrollTo({
-				top: section.offsetTop - 100, // Небольшое смещение
-				behavior: "smooth",
-			});
-		}
-	};
-
-	// Определяем единственную активную секцию для навигации
-	// Берем первую видимую секцию или null, если ничего не видно
-	const activeSection =
-		visibleSections.length > 0 ? visibleSections[0] : null;
-	// В более сложной логике useScrollSpy может сам возвращать активную секцию
 
 	return (
 		<PageWrapper>
 			<Header name="Nguyen Tien Hoach" title="Developer" />
-
-			<Nav
-				sections={sections}
-				activeSection={activeSection}
-				onSelectSection={scrollToSection} // Передаем функцию скролла
-			/>
 
 			<AboutSection
 				id="about"
