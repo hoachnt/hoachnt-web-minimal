@@ -61,7 +61,7 @@ export default function Home() {
 		<PageWrapper>
 			<Header name="Nguyen Tien Hoach" title="Developer" />
 
-			<GithubSection />
+			<GithubSection id="github" />
 
 			<AboutSection
 				id="about"
