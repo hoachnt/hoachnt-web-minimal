@@ -1,17 +1,12 @@
-// components/Header.tsx
-import React from "react";
+"use client";
+
+import React, { useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { ThemeToggle } from "@/components/theme-toggle"; // Убедитесь, что путь верный
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from "./ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import Image from "next/image";
+import clsx from "clsx";
 
 interface HeaderProps {
 	name: string;
@@ -19,9 +14,28 @@ interface HeaderProps {
 }
 
 export function Header({ name, title }: HeaderProps) {
+	const [scrolled, setScrolled] = useState(false);
+
+	const handleScroll = useCallback(() => {
+		setScrolled(window.scrollY > 10);
+	}, []);
+
+	useEffect(() => {
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, [handleScroll]);
+
+	const headerClasses = clsx(
+		"sticky top-0 left-0 z-10 flex items-center justify-between transition-all duration-300 mb-8 sm:mb-12",
+		{
+			"backdrop-blur-sm bg-background/50 p-6 sm:p-8 rounded-3xl top-4":
+				scrolled,
+		}
+	);
+
 	return (
 		<motion.header
-			className="flex justify-between items-center mb-8 sm:mb-12"
+			className={headerClasses}
 			initial={{ opacity: 0, y: -20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.5 }}
@@ -37,7 +51,6 @@ export function Header({ name, title }: HeaderProps) {
 							damping: 10,
 						}}
 					>
-						{/* Профиль лого/инициалы */}
 						<Avatar className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#111111] dark:bg-[#f5f5f1] flex items-center justify-center">
 							<AvatarImage
 								src="/me.jpg"
@@ -63,7 +76,6 @@ export function Header({ name, title }: HeaderProps) {
 						width={600}
 						height={600}
 						className="w-full h-auto max-w-2xl rounded-4xl object-cover"
-						priority={false}
 						sizes="(max-width: 768px) 100vw, 600px"
 						style={{ aspectRatio: "1 / 1" }}
 					/>
