@@ -13,6 +13,7 @@ import { Footer } from "@/components/Footer"; // Убедитесь, что пу
 import { useCurrentTime } from "@/hooks/useCurrentTime"; // Убедитесь, что пути верны
 import { useProjectCount } from "@/hooks/useProjectCount"; // Убедитесь, что пути верны
 import { useScrollSpy } from "@/hooks/useScrollSpy"; // Убедитесь, что пути верны
+import GithubSection from "@/components/Sections/GithubSection";
 
 // Данные для секций (вынесены, чтобы их было легко менять или получать из API)
 const sections: SectionId[] = ["about", "skills", "contact"]; // 'projects' and 'blog' were not full sections in original HTML
@@ -59,6 +60,8 @@ export default function Home() {
 	return (
 		<PageWrapper>
 			<Header name="Nguyen Tien Hoach" title="Developer" />
+
+			<GithubSection />
 
 			<AboutSection
 				id="about"
