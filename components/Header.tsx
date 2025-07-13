@@ -38,8 +38,12 @@ export function Header({ name, title }: HeaderProps) {
 						}}
 					>
 						{/* Профиль лого/инициалы */}
-						<Avatar className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#111111] dark:bg-[#f5f5f1] flex items-center justify-center">
-							<AvatarImage src="/me.jpg" alt="Me" />
+						<Avatar className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#111111] dark:bg-[#f5f5f1] flex items-center justify-center">
+							<AvatarImage
+								src="/me.jpg"
+								alt="Me"
+								className="object-cover"
+							/>
 							<AvatarFallback>{name}</AvatarFallback>
 						</Avatar>
 						<div className="ml-3">
