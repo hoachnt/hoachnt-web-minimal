@@ -17,9 +17,16 @@ export function Header({ name, title }: HeaderProps) {
 	const [scrolled, setScrolled] = useState(false);
 
 	useEffect(() => {
-		const onScroll = () => setScrolled(window.scrollY > 10);
-		window.addEventListener("scroll", onScroll, { passive: true });
-		return () => window.removeEventListener("scroll", onScroll);
+		const checkScroll = () => {
+			setScrolled(window.scrollY > 10);
+		};
+
+		checkScroll(); // Проверка при монтировании
+		window.addEventListener("scroll", checkScroll, { passive: true });
+
+		return () => {
+			window.removeEventListener("scroll", checkScroll);
+		};
 	}, []);
 
 	const headerClasses = clsx(
