@@ -1,7 +1,8 @@
-// components/Sections/AboutSection.tsx
-import React from "react";
+"use client";
+
 import { motion } from "framer-motion";
 import { SectionId } from "@/types";
+
 interface AboutSectionProps {
 	id: SectionId;
 	description: string;
@@ -15,6 +16,8 @@ export function AboutSection({
 	location,
 	currentTime,
 }: AboutSectionProps) {
+	const showTime = typeof window !== "undefined";
+
 	return (
 		<motion.section
 			id={id}
@@ -25,16 +28,15 @@ export function AboutSection({
 			viewport={{ once: true, margin: "-100px" }}
 		>
 			<motion.div
-				className="bg-white dark:bg-[#1a1a1a] rounded-3xl p-6 sm:p-8"
+				className="rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#1a1a1a]"
 				whileHover={{ scale: 1.02 }}
-				transition={{ type: "spring", stiffness: 300, damping: 10 }}
+				transition={{ type: "spring", stiffness: 300, damping: 15 }}
 			>
 				<p className="text-sm sm:text-base mb-4">{description}</p>
-				<div className="text-xs sm:text-sm text-[#666666] dark:text-[#999999]">
-					<p>
-						{location} • {currentTime}
-					</p>
-				</div>
+
+				<p className="text-xs sm:text-sm text-[#666] dark:text-[#999]">
+					{location} • {showTime && currentTime}
+				</p>
 			</motion.div>
 		</motion.section>
 	);

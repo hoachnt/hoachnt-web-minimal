@@ -35,29 +35,31 @@ interface SkillCategoryCardProps {
 	variants: Variants;
 }
 
-function SkillCategoryCard({ category, variants }: SkillCategoryCardProps) {
+const SkillCategoryCard = React.memo(function Card({
+	category,
+	variants,
+}: SkillCategoryCardProps) {
 	return (
 		<motion.div
-			key={category.title}
 			className="bg-white dark:bg-[#1a1a1a] rounded-3xl p-4 sm:p-6"
 			variants={variants}
 			whileHover={{
-				scale: 1.05,
+				scale: 1.035,
 				boxShadow: "0 10px 30px -15px rgba(0, 0, 0, 0.1)",
 			}}
 			transition={{ type: "spring", stiffness: 300, damping: 10 }}
 		>
-			<h2 className="text-xs sm:text-sm font-medium mb-3">
+			<h3 className="text-xs sm:text-sm font-medium mb-3">
 				{category.title}
-			</h2>
+			</h3>
 			<ul className="text-xs space-y-1 text-[#666666] dark:text-[#999999]">
 				{category.skills.map((skill) => (
-					<li key={skill}>{skill}</li>
+					<li key={`${category.title}-${skill}`}>{skill}</li>
 				))}
 			</ul>
 		</motion.div>
 	);
-}
+});
 
 export function SkillsSection({ id, skillCategories }: SkillsSectionProps) {
 	return (

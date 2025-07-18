@@ -1,31 +1,52 @@
-import React, { ReactNode } from "react";
-import "@/styles/globals.css";
+import { ReactNode } from "react";
 import { Inter } from "next/font/google";
+import { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
+import "@/styles/globals.css";
 
-// Configure the Inter font with subsets and CSS variable
+// Font configuration
 const inter = Inter({
 	subsets: ["latin"],
 	variable: "--font-sans",
+	display: "swap",
 });
 
-// Define metadata for the application
-export const metadata = {
-	title: "Nguyen Tien Hoach - Fullstack Developer",
+// App-wide metadata
+export const metadata: Metadata = {
+	title: "Nguyen Tien Hoach – Fullstack Developer",
 	description:
-		"Fullstack engineer specializing in developing scalable web applications and system architectures.",
+		"Fullstack engineer specializing in scalable web apps and clean system architecture.",
+	icons: {
+		icon: "/favicon.ico",
+	},
+	metadataBase: new URL("https://hoachnt.com"),
+	openGraph: {
+		title: "Nguyen Tien Hoach",
+		description:
+			"Fullstack engineer specializing in scalable web apps and system architecture.",
+		url: "https://hoachnt.com",
+		siteName: "HoachNT",
+		locale: "en_US",
+		type: "website",
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Nguyen Tien Hoach",
+		description:
+			"Fullstack engineer specializing in scalable web apps and system architecture.",
+	},
 };
 
-// Define props type for the RootLayout component
+// Layout props type
 interface RootLayoutProps {
 	children: ReactNode;
 }
 
-// RootLayout component
-const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
+// Layout component
+export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className={`${inter.variable} font-sans`}>
+			<body className={`${inter.variable} font-sans antialiased`}>
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="system"
@@ -37,6 +58,4 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
 			</body>
 		</html>
 	);
-};
-
-export default RootLayout;
+}

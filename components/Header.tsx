@@ -17,11 +17,8 @@ export function Header({ name, title }: HeaderProps) {
 	const [scrolled, setScrolled] = useState(false);
 
 	useEffect(() => {
-		const checkScroll = () => {
-			setScrolled(window.scrollY > 10);
-		};
-
-		checkScroll(); // Проверка при монтировании
+		const checkScroll = () => setScrolled(window.scrollY > 10);
+		checkScroll();
 		window.addEventListener("scroll", checkScroll, { passive: true });
 
 		return () => {
@@ -30,7 +27,7 @@ export function Header({ name, title }: HeaderProps) {
 	}, []);
 
 	const headerClasses = clsx(
-		"sticky top-0 left-0 z-10 flex items-center justify-between transition-all duration-300 mb-8 sm:mb-12",
+		"sticky top-0 z-10 flex items-center justify-between transition-all duration-300 mb-8 sm:mb-12",
 		scrolled &&
 			"backdrop-blur-sm bg-background/50 p-6 sm:p-8 rounded-3xl top-4"
 	);
@@ -38,9 +35,16 @@ export function Header({ name, title }: HeaderProps) {
 	return (
 		<motion.header
 			className={headerClasses}
-			initial={{ opacity: 0, y: -20 }}
-			animate={{ opacity: 1, y: 0 }}
-			transition={{ duration: 0.5 }}
+			initial="hidden"
+			animate="visible"
+			variants={{
+				hidden: { opacity: 0, y: -20 },
+				visible: {
+					opacity: 1,
+					y: 0,
+					transition: { duration: 0.5 },
+				},
+			}}
 		>
 			<UserAvatar name={name} title={title} />
 			<ThemeToggle />
@@ -55,15 +59,15 @@ function UserAvatar({ name, title }: HeaderProps) {
 				<motion.section
 					className="flex items-center cursor-pointer"
 					whileHover={{ scale: 1.05 }}
-					transition={{ type: "spring", stiffness: 400, damping: 10 }}
+					transition={{ type: "spring", stiffness: 300, damping: 20 }}
 				>
-					<Avatar className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-muted flex items-center justify-center">
+					<Avatar className="w-10 h-10 sm:w-12 sm:h-12 bg-muted">
 						<AvatarImage
 							src="/me.jpg"
-							alt="Me"
+							alt={name}
 							className="object-cover"
 						/>
-						<AvatarFallback>{name[0]}</AvatarFallback>
+						<AvatarFallback>{name.charAt(0)}</AvatarFallback>
 					</Avatar>
 					<div className="ml-3">
 						<h1 className="text-sm sm:text-base font-medium">
@@ -76,7 +80,7 @@ function UserAvatar({ name, title }: HeaderProps) {
 			<DialogContent className="rounded-4xl border-none p-0">
 				<Image
 					src="/me.jpg"
-					alt="Me"
+					alt={name}
 					width={600}
 					height={600}
 					className="w-full h-auto max-w-2xl rounded-4xl object-cover"
