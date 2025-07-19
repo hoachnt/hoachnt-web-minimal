@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import { type JSX } from "react";
 
 // types/index.ts
 export type SectionId = "about" | "skills" | "projects" | "blog" | "contact";

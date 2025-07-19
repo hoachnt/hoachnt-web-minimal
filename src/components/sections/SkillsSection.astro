@@ -1,0 +1,34 @@
+---
+import type { SkillCategory } from "types";
+
+// Define the SkillCategory type here if needed
+const SkillCategory = {
+	title: "string",
+	skills: ["string"],
+};
+
+const Props = {
+	skillCategories: [SkillCategory],
+};
+
+const { skillCategories } = Astro.props;
+---
+
+<section id="skills" class="mb-12 pt-4">
+	<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+		{
+			skillCategories.map((category: SkillCategory) => (
+				<div class="bg-white dark:bg-[#1a1a1a] rounded-3xl p-4 sm:p-6 hover:scale-[1.035] transition-transform duration-300">
+					<h3 class="text-xs sm:text-sm font-medium mb-3">
+						{category.title}
+					</h3>
+					<ul class="text-xs space-y-1 text-[#666666] dark:text-[#999999]">
+						{category.skills.map((skill) => (
+							<li>{skill}</li>
+						))}
+					</ul>
+				</div>
+			))
+		}
+	</div>
+</section>

@@ -1,0 +1,54 @@
+---
+import ThemeToggle from "@/components/ThemeToggle";
+import UserAvatar from "@/components/UserAvatar";
+
+const { name, title } = Astro.props;
+---
+
+<header
+	id="header"
+	class="sticky top-0 z-10 flex items-center justify-between transition-all duration-300 mb-8 sm:mb-12"
+>
+	<UserAvatar name={name} title={title} client:load />
+	<ThemeToggle client:load />
+</header>
+
+<script>
+	function updateHeader() {
+		const header = document.getElementById("header");
+		if (!header) return;
+
+		const scrolled = window.scrollY > 10;
+
+		if (scrolled) {
+			header.classList.add(
+				"backdrop-blur-sm",
+				"bg-background/50",
+				"p-6",
+				"sm:p-8",
+				"rounded-3xl",
+				"top-4"
+			);
+		} else {
+			header.classList.remove(
+				"backdrop-blur-sm",
+				"bg-background/50",
+				"p-6",
+				"sm:p-8",
+				"rounded-3xl",
+				"top-4"
+			);
+		}
+	}
+
+	// Initial check
+	updateHeader();
+
+	// Listen for scroll
+	window.addEventListener("scroll", updateHeader, { passive: true });
+
+	// Clean up on navigation
+	document.addEventListener("astro:before-preparation", () => {
+		window.removeEventListener("scroll", updateHeader);
+	});
+</script>

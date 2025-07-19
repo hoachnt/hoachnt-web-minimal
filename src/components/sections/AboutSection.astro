@@ -1,0 +1,16 @@
+---
+import CurrentTime from "@/components/CurrentTime";
+
+const { description, location } = Astro.props;
+---
+
+<section id="about" class="mb-12 pt-4">
+	<div
+		class="rounded-3xl p-6 sm:p-8 bg-white dark:bg-[#1a1a1a] hover:scale-[1.02] transition-transform duration-300"
+	>
+		<p class="text-sm sm:text-base mb-4">{description}</p>
+		<p class="text-xs sm:text-sm text-[#666] dark:text-[#999]">
+			{location} • <CurrentTime client:load />
+		</p>
+	</div>
+</section>

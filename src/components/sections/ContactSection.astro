@@ -1,0 +1,37 @@
+---
+import StatCard from "@/components/StatCard";
+import SocialLinks from "@/components/SocialLinks";
+
+const { articlesCount, email } = Astro.props;
+---
+
+<section id="contact" class="mb-12 pt-4">
+	<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+		<StatCard client:load />
+
+		<div
+			class="bg-white dark:bg-[#1a1a1a] rounded-full aspect-square flex items-center justify-center hover:scale-105 transition-transform duration-300"
+		>
+			<div class="text-center">
+				<p class="text-lg sm:text-xl font-medium">{articlesCount}</p>
+				<p class="text-xs text-[#666666] dark:text-[#999999]">
+					Articles
+				</p>
+			</div>
+		</div>
+
+		<div
+			class="md:col-span-2 bg-white dark:bg-[#1a1a1a] rounded-3xl p-4 sm:p-6 flex items-center hover:scale-[1.02] transition-transform duration-300"
+		>
+			<div class="w-full">
+				<h3 class="text-sm sm:text-base font-medium mb-2">
+					Get in touch
+				</h3>
+				<p class="text-xs sm:text-sm text-[#666] dark:text-[#999] mb-4">
+					{email}
+				</p>
+				<SocialLinks />
+			</div>
+		</div>
+	</div>
+</section>
