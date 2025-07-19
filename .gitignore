@@ -3,8 +3,8 @@
 # dependencies
 /node_modules
 
-# next.js
-/.next/
+# astro.js
+/.astro/
 /out/
 
 # production
