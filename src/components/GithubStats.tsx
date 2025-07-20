@@ -25,15 +25,6 @@ export default function GithubStats() {
 		return () => observer.disconnect();
 	}, []);
 
-	if (!mounted) {
-		return (
-			<div className="grid md:grid-cols-2 gap-4">
-				<Skeleton className="w-full h-48 rounded-3xl" />
-				<Skeleton className="w-full h-48 rounded-3xl" />
-			</div>
-		);
-	}
-
 	return (
 		<div className="grid md:grid-cols-2 gap-4">
 			<motion.div
