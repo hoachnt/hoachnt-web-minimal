@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { motion } from "framer-motion";
+import MyImage from "@/images/me.jpg";
 
 interface UserAvatarProps {
 	name: string;
@@ -9,50 +12,44 @@ interface UserAvatarProps {
 }
 
 export default function UserAvatar({ name, title }: UserAvatarProps) {
-	const [isDialogOpen, setIsDialogOpen] = useState(false);
+	const [open, setOpen] = useState(false);
 
 	return (
-		<>
-			<motion.section
-				className="flex items-center cursor-pointer"
-				whileHover={{ scale: 1.05 }}
-				transition={{ type: "spring", stiffness: 300, damping: 20 }}
-				onClick={() => setIsDialogOpen(true)}
-			>
-				<div className="w-10 h-10 sm:w-12 sm:h-12 bg-muted rounded-full overflow-hidden">
+		<Dialog open={open} onOpenChange={setOpen}>
+			<DialogTrigger asChild>
+				<motion.div
+					className="flex items-center cursor-pointer select-none"
+					whileHover={{ scale: 1.05 }}
+					transition={{ type: "spring", stiffness: 300, damping: 20 }}
+				>
+					<Avatar className="w-10 h-10 sm:w-12 sm:h-12">
+						<AvatarImage
+							src={MyImage.src}
+							alt={name}
+							loading="lazy"
+							className="object-cover"
+						/>
+						<AvatarFallback>{name[0]}</AvatarFallback>
+					</Avatar>
+					<div className="ml-3 text-left">
+						<p className="text-sm sm:text-base font-medium leading-none">
+							{name}
+						</p>
+						<p className="text-xs text-muted-foreground">{title}</p>
+					</div>
+				</motion.div>
+			</DialogTrigger>
+
+			<DialogContent className="max-w-xl p-0 overflow-hidden bg-transparent shadow-none border-0">
+				<div className="relative w-full">
 					<img
-						src="/me.jpg"
+						src={MyImage.src}
 						alt={name}
-						className="w-full h-full object-cover"
+						loading="lazy"
+						className="w-full h-auto rounded-3xl object-cover aspect-square"
 					/>
 				</div>
-				<div className="ml-3">
-					<h1 className="text-sm sm:text-base font-medium">{name}</h1>
-					<p className="text-xs text-muted-foreground">{title}</p>
-				</div>
-			</motion.section>
-
-			{isDialogOpen && (
-				<div
-					className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
-					onClick={() => setIsDialogOpen(false)}
-				>
-					<div className="relative max-w-2xl w-full">
-						<img
-							src="/me.jpg"
-							alt={name}
-							className="w-full h-auto rounded-3xl object-cover"
-							style={{ aspectRatio: "1 / 1" }}
-						/>
-						<button
-							onClick={() => setIsDialogOpen(false)}
-							className="absolute top-4 right-4 w-8 h-8 rounded-full bg-stone-300/30 dark:bg-stone-600/60 backdrop-blur-xl flex items-center justify-center text-white hover:bg-stone-300/50 dark:hover:bg-stone-600/80 transition-colors"
-						>
-							×
-						</button>
-					</div>
-				</div>
-			)}
-		</>
+			</DialogContent>
+		</Dialog>
 	);
 }
