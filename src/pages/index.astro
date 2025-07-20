@@ -6,6 +6,7 @@ import AboutSection from "@/components/sections/AboutSection.astro";
 import SkillsSection from "@/components/sections/SkillsSection.astro";
 import ContactSection from "@/components/sections/ContactSection.astro";
 import Footer from "@/components/Footer.astro";
+import { AppleHelloEnglishEffect } from "@/components/AppleHelloEffect";
 
 const skillCategories = [
 	{
@@ -48,6 +49,10 @@ const currentYear = new Date().getFullYear();
 			class="container mx-auto px-4 py-8 sm:py-12 max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-5xl"
 		>
 			<Header name="Nguyen Tien Hoach" title="Developer" />
+
+			<div class="mb-12 pt-4">
+				<AppleHelloEnglishEffect client:load />
+			</div>
 
 			<GithubSection />
 
